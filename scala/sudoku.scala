@@ -26,7 +26,6 @@ object Main {
     val rows = new_board.map(_.toInt).sliding(9,9).toArray;
     val cols = rows.transpose
     val cells = (0 to 2).map(cell(_, new_board.toArray)).flatten.toArray
-1
     unique_set(rows) && unique_set(cols) && unique_set(cells)
   }
 
