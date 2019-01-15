@@ -11,15 +11,30 @@ object Main {
     array.distinct.length == array.length
 
 
-  def unique_set(sets : Array[Array[Int]]) : Boolean = {
+  def unique_set2(sets : Array[Array[Int]]) : Boolean = {
     for ( set <- sets ) {
       if ( containsNoDups(set) == false ) return false;
     }
     return true;
   }
 
-  def cell (idx : Int, new_board : Array[Int]) : Array[Array[Int]] = 
+  def unique_set(sets : Array[Array[Int]]) : Boolean = {
+    sets.forall(set => set.distinct.length == set.length)
+  }  
+
+  val set1 = Array(Array(1,2,3), Array(3,4,5))
+  val set2 = Array(Array(1,2,3), Array(2,3,4))
+  val set3 = Array(Array(1,2,3), Array(3,4,3))
+  val set4 = Array(Array(1,2,3), Array(3,4,3), Array(7,8,9))
+
+  assert ( unique_set(set1) == true )
+  assert ( unique_set(set2) == true )
+  assert ( unique_set(set3) == false )
+  assert ( unique_set(set3) == false )
+
+  def cell (idx : Int, new_board : Array[Int]) : Array[Array[Int]] = {
      new_board.drop(idx * 3).sliding(3,9).toArray.grouped(3).toArray.map(_.flatten)
+  }
 
   def sudoku ( board : String ) : Boolean = {
     val new_board = board.split(",").map(_.toInt)
