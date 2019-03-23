@@ -36,4 +36,4 @@ object problem7 {
   def main (args :Array[String]) {
     println(answer)
   }
-}]
+}
