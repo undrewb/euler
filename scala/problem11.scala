@@ -89,13 +89,9 @@ def col_products = line_product(split_grid.transpose)
 def right_products = angle_right(split_grid)
 def left_products = angle_left(split_grid)
 
-products = row_products ++ col_products ++ right_products ++ left_products
+def products = row_products ++ col_products ++ right_products ++ left_products
 
-def adjacent_sets = n_str.sliding(13,1)
-
-def long_adjacent_sets = adjacent_sets.map(v => v.map(_.asDigit.toLong)).toList
-
-def answer = long_adjacent_sets.map(arr => arr.foldLeft(1L)(_*_)).max
+def answer = products.flatten.max
 
   /** The main entry point for an Euler solution. Just calls `answer`. */
 def main (args :Array[String]) {
