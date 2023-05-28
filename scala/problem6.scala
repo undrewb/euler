@@ -25,7 +25,5 @@ object problem6 {
     def answer = sqr_of_sum - sum_of_sqr
     
       /** The main entry point for an Euler solution. Just calls `answer`. */
-    def main (args :Array[String]) {
-        println(answer)
-    }
+    def main (args :Array[String]) = println(answer)
 }

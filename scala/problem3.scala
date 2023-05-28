@@ -17,8 +17,6 @@ object problem3 {
     def answer = all_prime_factors(target).last
     
       /** The main entry point for an Euler solution. Just calls `answer`. */
-    def main (args :Array[String]) {
-        println(answer)
-    }
+    def main (args :Array[String]) = println(answer)
 }
 

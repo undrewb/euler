@@ -28,7 +28,5 @@ object problem4 {
     def answer = products.sorted.max
     
       /** The main entry point for an Euler solution. Just calls `answer`. */
-    def main (args :Array[String]) {
-        println(answer)
-    }
+    def main (args :Array[String]) = println(answer)
 }

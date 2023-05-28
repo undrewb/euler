@@ -1,9 +1,8 @@
  def factors(n:Int) = {
-    println("factorising " + n)
+     println("factorising " + n)
     val sqrt = math.sqrt(n).toInt
     var nfactors = (for { i <- 1 to sqrt if n % i == 0 } yield 2).sum
-    if (sqrt*sqrt==n) 
-        nfactors - 1   // dont count sqrt twice
+    if (sqrt*sqrt==n) nfactors - 1   // dont count sqrt twice
     nfactors + 2 // 1 and itself 
 }
 

@@ -14,8 +14,8 @@ object Main {
         values(0).map(single_double(_)).sum + values(1).sum
     }
     
-    def main(args: Array[String]) {
+    def main(args: Array[String]) =
         for( ln <- io.Source.stdin.getLines )
              println( checksum ( ln ) )
-    }
+    
 }

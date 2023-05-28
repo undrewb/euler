@@ -23,7 +23,5 @@ object problem5 {
     def answer = products
     
       /** The main entry poLong for an Euler solution. Just calls `answer`. */
-    def main (args :Array[String]) {
-        println(answer)
-    }
+    def main (args :Array[String]) = println(answer)
 }

@@ -94,9 +94,7 @@ def products = row_products ++ col_products ++ right_products ++ left_products
 def answer = products.flatten.max
 
   /** The main entry point for an Euler solution. Just calls `answer`. */
-def main (args :Array[String]) {
-  println(answer)
-}
+def main (args :Array[String]) = println(answer)
 
 /*
 def grid = 

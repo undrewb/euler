@@ -12,7 +12,5 @@ class Problem3 {
 }
 
 object Problem3 {
-  def main(args: Array[String]) {
-    new Problem3
-  }
+  def main(args: Array[String]) = new Problem3
 }

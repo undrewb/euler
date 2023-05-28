@@ -42,7 +42,5 @@ object problem50 {
   def answer = nth_prime(10001L)
     
   /** The main entry point for an Euler solution. Just calls `answer`. */
-  def main (args :Array[String]) {
-    println(answer)
-  }
+  def main (args :Array[String]) = println(answer)
 }
