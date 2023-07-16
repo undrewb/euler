@@ -9,11 +9,18 @@ Starting in the top left corner of a 2×2 grid, and only being able to move to t
 
 How many such routes are there through a 20×20 grid?
 */
- def factorial(x: BigInt): BigInt = 
-    if (x == 0) 1 else x * factorial(x - 1)
+ object problem15 {
 
-val paths: BigInt = factorial(40)/(factorial(20)*factorial(20))
+  def factorial(x: BigInt): BigInt =
+   if (x == 0) 1 else x * factorial(x - 1)
 
+  val paths: BigInt = factorial(40) / (factorial(20) * factorial(20))
+
+  def answer = paths
+  def main(args: Array[String]): Unit = {
+   println(paths)
+  }
+ }
 /*
   how many combinations of RRRRRRRRRRRRRRRRRRRRDDDDDDDDDDDDDDDDDDDD are there?
   */

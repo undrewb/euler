@@ -32,9 +32,9 @@ The product of these numbers is 26 × 63 × 78 × 14 = 1788696.
 
 What is the greatest product of four adjacent numbers in the same direction (up, down, left, right, or diagonally) in the 20×20 grid?
 */
-
-def grid = 
-"""08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
+object problem11 {
+  def grid =
+    """08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08
 49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00
 81 49 31 73 55 79 14 29 93 71 40 67 53 88 30 03 49 13 36 65
 52 70 95 23 04 60 11 42 69 24 68 56 01 32 56 71 37 02 36 91
@@ -54,48 +54,53 @@ def grid =
 20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16
 20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54
 01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"""
-    
 
 
+  def line_of_four(grid: Array[Array[Int]]) = for (line <- grid) yield {
+    line.sliding(4, 1).toArray
+  }
 
-def line_of_four(grid: Array[Array[Int]]) = for ( line <- grid ) yield { line.sliding(4,1).toArray }
+  def line_product(grid: Array[Array[Int]]) = {
+    for (row <- line_of_four(grid)) yield {
+      row.map(_.foldRight(1)(_ * _))
+    }
+  }
 
-def line_product(grid: Array[Array[Int]])= {
-    for (row <- line_of_four(grid)) yield {row.map(_.foldRight(1)(_*_)) }
-}
+  def split_grid = grid.replaceAll("\n", " ").split(" ").map(_.toInt).sliding(20, 20).toArray
 
-def split_grid = grid.replaceAll("\n", " ").split(" ").map(_.toInt).sliding(20,20).toArray
-
-def angle_right(g: Array[Array[Int]]) = {
-   for ( j <- 0 to 16 ) {
-       for ( i <- 0 to 16 ) {
-            g(j)(i) =  g(j)(i) * g(j+1)(i+1) * g(j+2)(i+2) * g(j+3)(i+3)
-        }   
+  def angle_right(g: Array[Array[Int]]) = {
+    for (j <- 0 to 16) {
+      for (i <- 0 to 16) {
+        g(j)(i) = g(j)(i) * g(j + 1)(i + 1) * g(j + 2)(i + 2) * g(j + 3)(i + 3)
+      }
     }
     g
-}
+  }
 
-def angle_left(g: Array[Array[Int]]) = {
-   for ( j <- 19 to 3 by -1 ) {
-       for ( i <- 0 to 16 ) {
-            g(j)(i) =  g(j)(i) * g(j-1)(i+1) * g(j-2)(i+2) * g(j-3)(i+3)
-        }   
+  def angle_left(g: Array[Array[Int]]) = {
+    for (j <- 19 to 3 by -1) {
+      for (i <- 0 to 16) {
+        g(j)(i) = g(j)(i) * g(j - 1)(i + 1) * g(j - 2)(i + 2) * g(j - 3)(i + 3)
+      }
     }
     g
-}
+  }
 
-def row_products = line_product(split_grid)
-def col_products = line_product(split_grid.transpose)
-def right_products = angle_right(split_grid)
-def left_products = angle_left(split_grid)
+  def row_products = line_product(split_grid)
 
-def products = row_products ++ col_products ++ right_products ++ left_products
+  def col_products = line_product(split_grid.transpose)
 
-def answer = products.flatten.max
+  def right_products = angle_right(split_grid)
+
+  def left_products = angle_left(split_grid)
+
+  def products = row_products ++ col_products ++ right_products ++ left_products
+
+  def answer = products.flatten.max
 
   /** The main entry point for an Euler solution. Just calls `answer`. */
-def main (args :Array[String]) = println(answer)
-
+  def main(args: Array[String]) = println(answer)
+}
 /*
 def grid = 
 """08 02 22 97
