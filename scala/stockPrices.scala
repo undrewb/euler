@@ -22,7 +22,7 @@ No "shorting"—you need to buy before you can sell. Also, you can't buy and sel
 
 */
 
-object Main {
+object checkSum {
 
   val prices1 = "15,10,12,15,17,33,5,9,25,23,28"
   val prices2 = "5,15,10,12,15,17,33,9,25,23,28,32,3,11,14,17"

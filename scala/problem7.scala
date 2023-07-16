@@ -20,9 +20,9 @@ object problem7 {
 
   def get_next_prime(start: Long, x : Long) : Long = {
     var candidate = start
-    do {
+    while ( is_prime(candidate) == false) {
       candidate = candidate + 1
-    } while ( is_prime(candidate) == false)
+    } 
     candidate
   }
 

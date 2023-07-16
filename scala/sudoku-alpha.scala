@@ -1,4 +1,4 @@
-object Main {
+object SudokuAlpha {
     
     def containsNoDups[A](list: List[A], seen: Set[A] = Set[A]()): Boolean = 
         list match {
@@ -15,13 +15,13 @@ object Main {
       return true;
     }
 
-   def unique_grid(game: Array[Array[String]]): Boolean ={
+   def unique_grid(game: Array[Array[String]]): Boolean = {
     val grid : Array[Array[String]] = Array.ofDim[String](1,3)
 
     for(i <- 0 to (game.length-1)/3) {
       for(o <- 0 to (game(i).length-1)/3) {
 
-          println (i + ", " + o)
+        println (i + ", " + o)
         grid((i*3)+o) = 
             game(0+(i*3)).slice(0+(o*3), 3+(o*3)) ++ 
             game(1+(i*3)).slice(0+(o*3), 3+(o*3)) ++ 
@@ -39,7 +39,7 @@ object Main {
         unique_grid(new_board)
     }
     
-    def main(args: Array[String]) {
+    def main(args: Array[String]) = {
         for( ln <- io.Source.stdin.getLines ) 
              println( sudoku ( ln ) )
     }

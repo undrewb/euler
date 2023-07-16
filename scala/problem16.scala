@@ -8,5 +8,7 @@ Problem 16
 
 What is the sum of the digits of the number 2^1000?
 */
-
-BigInt(2).pow(1000).toString.toList.map(_.asDigit).sum
+object problem16 {
+  def answer = BigInt(2).pow(1000).toString.toList.map(_.asDigit).sum
+  def main (args :Array[String]) = println(answer)
+}
