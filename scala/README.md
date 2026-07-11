@@ -10,6 +10,7 @@ This folder contains standalone Scala solutions for Project Euler problems.
 ## Folder Layout
 
 - Problem files: `problem1.scala`, `problem2.scala`, ...
+- Template file: `problemN.template.scala`
 - Build definition: `build.sbt`
 
 Most problem files define an object with a `main` method (for example `object problem1`), so they can be compiled and run directly.
@@ -48,6 +49,28 @@ If you want to run everything through sbt conventions, move problem files under 
 ```sh
 sbt compile
 sbt "runMain problem1"
+```
+
+## Add A New Problem
+
+Use the template file to create a new solution quickly:
+
+```sh
+cd scala
+cp problemN.template.scala problem23.scala
+```
+
+Then edit `problem23.scala`:
+
+- Rename `object problemN` to `object problem23`
+- Update the header comment and problem URL
+- Implement `answer`
+
+Compile and run:
+
+```sh
+scalac problem23.scala
+scala problem23
 ```
 
 ## Tips
