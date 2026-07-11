@@ -21,23 +21,33 @@ From the `scala` folder:
 
 ```sh
 cd scala
-scalac problem1.scala
-scala problem1
+scala run problem1.scala
 ```
 
 Run another one the same way:
 
 ```sh
-scalac problem22.scala
-scala problem22
+scala run problem22.scala
 ```
 
-## Clean Compiled Class Files
+This keeps build artifacts out of the source folder by default.
 
-If you compile directly with `scalac`, remove generated `.class` files with:
+## Optional: Use `scalac` with an Isolated Output Folder
+
+If you want to compile with `scalac`, send class files to a build folder:
+
+```sh
+mkdir -p build-local/scala-classes
+scalac -d build-local/scala-classes problem1.scala
+```
+
+## Clean Compiled Artifacts
+
+If you previously compiled in-place, clean generated files with:
 
 ```sh
 find . -name "*.class" -delete
+find . -name "*.tasty" -delete
 ```
 
 ## sbt Notes
@@ -69,8 +79,7 @@ Then edit `problem23.scala`:
 Compile and run:
 
 ```sh
-scalac problem23.scala
-scala problem23
+scala run problem23.scala
 ```
 
 ## Tips

@@ -1,0 +1,5 @@
+build-local/
+*.class
+*.tasty
+.scala-build/
+.bsp/
