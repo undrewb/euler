@@ -33,6 +33,7 @@ add_executable(problem19 problem19.cpp)
 add_executable(problem20 problem20.cpp)
 add_executable(problem21 problem21.cpp)
 add_executable(problem22 problem22.cpp)
+add_executable(problem23 problem23.cpp)
 
 # For multi-file projects with headers and separate .cpp files
 # add_executable(rooster main.cpp dog.cpp dog.h cat.cpp cat.h)

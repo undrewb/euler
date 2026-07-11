@@ -1,8 +1,12 @@
-// make an object that takes a string of numbers and returns the sum of the numbers
+/*
+https://projecteuler.net/problem=13
+
+Large sum
+*/
 
 object problem13 {
-    
-    var str ="""37107287533902102798797998220837590246510135740250
+  private val numbers =
+    """37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629
 91942213363574161572522430563301811072406154908250
@@ -103,6 +107,56 @@ object problem13 {
 20849603980134001723930671666823555245252804609722
 53503534226472524250874054075591789781264330331690"""
 
-    def answer = str.replace("\n", "").grouped(50).map(BigInt(_)).sum.toString.slice(0,10)
-    def main (args :Array[String]) = println(answer)
+  def baselineAnswer: Long = {
+    numbers
+      .split("\\n")
+      .map(BigInt(_))
+      .sum
+      .toString
+      .take(10)
+      .toLong
+  }
+
+  def optimizedAnswer: Long = {
+    val prefixDigits = 15
+    val prefixSum = numbers.split("\\n").iterator.map(n => BigInt(n.take(prefixDigits))).sum
+    prefixSum.toString.take(10).toLong
+  }
+
+  case class Result(value: Long, timeNs: Long)
+
+  def answer: Long = {
+    optimizedAnswer
+  }
+
+  def eulerBaseline(): Result = {
+    val start = System.nanoTime()
+    val value = baselineAnswer
+    val end = System.nanoTime()
+    Result(value, end - start)
+  }
+
+  def euler(): Result = {
+    val start = System.nanoTime()
+    val value = optimizedAnswer
+    val end = System.nanoTime()
+    Result(value, end - start)
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Project Euler Problem 13")
+
+    val baseline = eulerBaseline()
+    val optimized = euler()
+
+    println(s"Result (baseline): ${baseline.value}")
+    println(s"Time (baseline): ${baseline.timeNs} ns")
+    println(s"Result (optimized): ${optimized.value}")
+    println(s"Time (optimized): ${optimized.timeNs} ns")
+
+    if (optimized.timeNs > 0) {
+      val speedup = baseline.timeNs.toDouble / optimized.timeNs.toDouble
+      println(s"Speedup: ${speedup}x")
+    }
+  }
 }

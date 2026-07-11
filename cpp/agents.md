@@ -11,5 +11,7 @@ When solving Project Euler problems in this repository:
 3. Do not include final answer/result values in [learnings.md](learnings.md).
 4. Keep entries concise and focused on what was learned, not full code dumps.
 5. If a previous note is wrong, correct the existing section instead of duplicating it.
+6. No-spoiler mode by default: do not reveal final numeric Euler answers unless the user explicitly asks.
+7. Prefer hint-first support (baseline strategy, optimization ideas, and code review) over full solution dumps.
 
 This file exists to remind the agent to keep [learnings.md](learnings.md) current.

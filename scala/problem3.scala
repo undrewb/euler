@@ -1,22 +1,87 @@
+/*
+https://projecteuler.net/problem=3
+
+Largest prime factor
+*/
+
 object problem3 {
+  private val target = 600851475143L
 
-    val target : Long = 600851475143L;
+  private def largestPrimeFactor(n: Long): Long = {
+    var value = n
+    var factor = 2L
+    var largest = 1L
 
-    def is_prime ( number : Long ) : Boolean = {
-        all_factors(number) == List()
+    while (factor * factor <= value) {
+      while (value % factor == 0) {
+        largest = factor
+        value /= factor
+      }
+      factor += 1
     }
 
-    def all_factors( number: Long ) : List[Long] = {
-        (2L to math.sqrt(number).toLong).filter(factor => number % factor == 0).toList.flatMap(factor => List(factor, number/factor)).sorted
+    if (value > 1) value else largest
+  }
+
+  def baselineAnswer: Long = {
+    largestPrimeFactor(target)
+  }
+
+  def optimizedAnswer: Long = {
+    var n = target
+    var largest = 1L
+
+    while (n % 2L == 0L) {
+      largest = 2L
+      n /= 2L
     }
 
-    def all_prime_factors(number : Long): List[Long] = { 
-        all_factors(number).filter(is_prime);
+    var factor = 3L
+    while (factor * factor <= n) {
+      while (n % factor == 0L) {
+        largest = factor
+        n /= factor
+      }
+      factor += 2L
     }
 
-    def answer = all_prime_factors(target).last
-    
-      /** The main entry point for an Euler solution. Just calls `answer`. */
-    def main (args :Array[String]) = println(answer)
+    if (n > 1L) n else largest
+  }
+
+  case class Result(value: Long, timeNs: Long)
+
+  def answer: Long = {
+    optimizedAnswer
+  }
+
+  def eulerBaseline(): Result = {
+    val start = System.nanoTime()
+    val value = baselineAnswer
+    val end = System.nanoTime()
+    Result(value, end - start)
+  }
+
+  def euler(): Result = {
+    val start = System.nanoTime()
+    val value = optimizedAnswer
+    val end = System.nanoTime()
+    Result(value, end - start)
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Project Euler Problem 3")
+
+    val baseline = eulerBaseline()
+    val optimized = euler()
+
+    println(s"Result (baseline): ${baseline.value}")
+    println(s"Time (baseline): ${baseline.timeNs} ns")
+    println(s"Result (optimized): ${optimized.value}")
+    println(s"Time (optimized): ${optimized.timeNs} ns")
+
+    if (optimized.timeNs > 0) {
+      val speedup = baseline.timeNs.toDouble / optimized.timeNs.toDouble
+      println(s"Speedup: ${speedup}x")
+    }
+  }
 }
-

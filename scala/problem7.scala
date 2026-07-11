@@ -1,38 +1,105 @@
 /*
+https://projecteuler.net/problem=7
 
-    https://projecteuler.net/problem=7
-
-    By listing the first six prime numbers: 2, 3, 5, 7, 11, and 13, we can see that the 6th prime is 13.
-
-    What is the 10 001st prime number?
-
-    */
+10001st prime
+*/
 
 object problem7 {
-
-  def is_prime ( number : Long ) : Boolean = {
-      all_factors(number) == List()
+  private def isPrime(n: Long): Boolean = {
+    if (n < 2) return false
+    if (n == 2) return true
+    if (n % 2 == 0) return false
+    var d = 3L
+    while (d * d <= n) {
+      if (n % d == 0) return false
+      d += 2
+    }
+    true
   }
 
-  def all_factors( number: Long ) : List[Long] = {
-      (2L to math.sqrt(number).toLong).filter(factor => number % factor == 0).toList.flatMap(factor => List(factor, number/factor)).sorted
-  }
-
-  def get_next_prime(start: Long, x : Long) : Long = {
-    var candidate = start
-    while ( is_prime(candidate) == false) {
-      candidate = candidate + 1
-    } 
+  private def nthPrime(n: Int): Long = {
+    var count = 0
+    var candidate = 1L
+    while (count < n) {
+      candidate += 1
+      if (isPrime(candidate)) {
+        count += 1
+      }
+    }
     candidate
   }
 
-  def nth_prime(n: Long) : Long = {
-    (1L to n).foldLeft(1L)(get_next_prime)
+  def baselineAnswer: Long = {
+    nthPrime(10001)
   }
 
-  def answer = nth_prime(10001L)
-    
-  /** The main entry point for an Euler solution. Just calls `answer`. */
-  def main (args :Array[String]) = println(answer)
-  
+  def optimizedAnswer: Long = {
+    val targetIndex = 10001
+    val n = targetIndex.toDouble
+    val upperBound = (n * (math.log(n) + math.log(math.log(n)))).toInt + 10
+
+    val isPrime = Array.fill(upperBound + 1)(true)
+    isPrime(0) = false
+    isPrime(1) = false
+
+    var p = 2
+    while (p * p <= upperBound) {
+      if (isPrime(p)) {
+        var m = p * p
+        while (m <= upperBound) {
+          isPrime(m) = false
+          m += p
+        }
+      }
+      p += 1
+    }
+
+    var count = 0
+    var value = 1
+    while (count < targetIndex) {
+      value += 1
+      if (isPrime(value)) {
+        count += 1
+      }
+    }
+
+    value.toLong
+  }
+
+  case class Result(value: Long, timeNs: Long)
+
+  def answer: Long = {
+    optimizedAnswer
+  }
+
+  def eulerBaseline(): Result = {
+    val start = System.nanoTime()
+    val value = baselineAnswer
+    val end = System.nanoTime()
+    Result(value, end - start)
+  }
+
+  def euler(): Result = {
+    val start = System.nanoTime()
+    val value = optimizedAnswer
+    val end = System.nanoTime()
+    Result(value, end - start)
+  }
+
+  def main(args: Array[String]): Unit = {
+    println("Project Euler Problem 7")
+
+    val baseline = eulerBaseline()
+    val optimized = euler()
+
+    println(s"Result (baseline): ${baseline.value}")
+    println(s"Time (baseline): ${baseline.timeNs} ns")
+    println(s"Result (optimized): ${optimized.value}")
+    println(s"Time (optimized): ${optimized.timeNs} ns")
+
+    if (optimized.timeNs > 0) {
+      val speedup = baseline.timeNs.toDouble / optimized.timeNs.toDouble
+      println(s"Speedup: ${speedup}x")
+    }
+  }
 }
