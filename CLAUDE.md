@@ -64,6 +64,8 @@ Notes:
 - One problem per file; keep each solution runnable on its own.
 - Match object/file naming to the problem number (e.g. `problem14` in `problem14.scala`).
 - Per-language details live in `cpp/README.md` and `scala/README.md`.
+- For each new problem file, copy the official Problem Euler title and full problem description
+  into the header comment block from https://projecteuler.net/problem=N.
 
 ## No-Spoiler Workflow
 

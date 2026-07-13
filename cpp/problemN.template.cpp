@@ -4,7 +4,8 @@ https://projecteuler.net/problem=N
 Problem N title
 
 TODO:
-- Add the full problem statement summary here.
+- Replace "Problem N title" with the official Project Euler title.
+- Copy the full official problem description into this header comment.
 - Implement evaluate() to return the final answer.
 */
 
